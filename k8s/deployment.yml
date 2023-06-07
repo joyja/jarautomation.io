@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: jar-website
+  name: jar-website
+  namespace: jar
+spec:
+  selector:
+    matchLabels:
+      app: jar-website
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: jar-website
+    spec:
+      containers:
+      - image: <IMAGE>
+        name: jar-website
+        imagePullPolicy: Always
