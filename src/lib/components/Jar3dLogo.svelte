@@ -1,0 +1,1 @@
+<img height="100px" src="/jar3dDark.png" alt="JAR Logo"/>

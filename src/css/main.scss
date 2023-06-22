@@ -1,0 +1,146 @@
+@import './preflight.scss';
+@import './text.scss';
+// @import './code.scss';
+@import './boxShadow.scss';
+@import './breakpoints.scss';
+@import './palette.scss';
+@import './spacing.scss';
+// @import '~/assets/css/form.scss';
+@import './prism.css';
+
+.page-enter-active,
+.page-leave-active {
+  transition: all .3s;
+}
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+  filter: blur(1rem);
+}
+
+$fontWeights: (
+  'thin': 100,
+  'extralight': 200,
+  'light': 300,
+  'normal': 400,
+  'medium': 500,
+  'semibold': 600,
+  'bold': 700,
+  'extrabold': 800,
+  'black': 900,
+);
+
+:root {
+  --break-sm: 640px;
+  --break-md: 768px;
+  --break-lg: 1024px;
+  --break-xl: 1280px;
+  --break-2xl: 1536px;
+  --spacing-unit: 0.325rem;
+  @each $fontWeight, $value in $fontWeights {
+    --font-#{$fontWeight}: #{$value};
+  }
+}
+
+::backdrop {
+  @each $color, $shades in $palette {
+    @each $shade, $value in $shades {
+      --#{$color}-#{$shade}: #{$value};
+      --#{$color}-#{$shade}--rgb: #{hexToRGB($value)};
+    }
+  }
+}
+
+@each $color, $shades in $palette {
+  @each $shade, $value in $shades {
+    .bg-#{$color}-#{$shade} {
+      background-color: var(--#{$color}-#{$shade});
+    }
+  }
+}
+
+.button {
+  font-family: Oswald;
+  text-transform: uppercase;
+  transition: font-size 0.3s ease-out, background-color 0.3s ease-out;
+  color: white;
+  border: none;
+  border-radius: calc(var(--spacing-unit));
+  padding: calc(1 * var(--spacing-unit));
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  padding: calc(var(--spacing-unit) * 2);
+  margin-top: calc(var(--spacing-unit) * 3);
+  font-size: var(--text-sm);
+  @include bpmd {
+    font-size: 1rem;
+  }
+}
+.button--primary {
+  background-color: var(--gray-600);
+  @extend .button;
+}
+.button--primary:hover {
+  background-color: var(--gray-700);
+}
+
+.button--accent {
+  @extend .button;
+  background-color: var(--red-500);
+}
+.button--accent:hover {
+  background-color: var(--red-600);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+.column {
+  display:flex;
+  flex-direction: column;
+  flex-basis: 800px;
+  flex-shrink: 1;
+  max-width: 100%;
+  padding-left: var(--spacing-unit);
+  padding-right: var(--spacing-unit);
+  @include bpmd {
+    position: relative;
+    padding-left: 120px;
+    padding-right: 120px;
+    max-width: 800px;
+  }
+}
+
+.title {
+  transition: margin-top .3s ease-out;
+  color: var(--neutral-300);
+  font-family: Oswald;
+  text-transform: uppercase;
+  font-weight: 500;
+  text-align: center;
+  margin-top: calc(var(--spacing-unit) * 5);
+  margin-bottom: calc(var(--spacing-unit) * 5);
+  @extend .text-xl;
+  @include bpmd {
+    font-size: var(--text-6xl);
+    line-height: var(--text-6xl-lh);
+    margin-top: calc(var(--spacing-unit) * 10);
+  }
+  @include bpxl {
+    margin-top: 0px;
+  }
+}
