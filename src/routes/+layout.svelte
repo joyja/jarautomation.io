@@ -1,6 +1,7 @@
 <script>
   import '@fontsource/oswald'
 	import '@fontsource/basic'
+  import '@fontsource/lobster'
 	import JarFooter from "../lib/components/JarFooter.svelte";
 	import PageTransition from '../lib/components/PageTransition.svelte';
   import JarHeader from "../lib/components/JarHeader.svelte";

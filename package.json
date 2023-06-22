@@ -15,6 +15,7 @@
 	},
 	"devDependencies": {
 		"@fontsource/basic": "^5.0.2",
+		"@fontsource/lobster": "^5.0.3",
 		"@fontsource/oswald": "^5.0.2",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",

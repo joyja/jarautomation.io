@@ -16,6 +16,9 @@ devDependencies:
   '@fontsource/basic':
     specifier: ^5.0.2
     version: 5.0.2
+  '@fontsource/lobster':
+    specifier: ^5.0.3
+    version: 5.0.3
   '@fontsource/oswald':
     specifier: ^5.0.2
     version: 5.0.2
@@ -291,6 +294,10 @@ packages:
 
   /@fontsource/basic@5.0.2:
     resolution: {integrity: sha512-gNM5jMVxOHQal9/tj4AYc5VajXjyMI0gCZ6tsqBi68YJNsFPqPeNXLGvekXurf+/3bqOKqTxDbooaVTbxWM5ig==}
+    dev: true
+
+  /@fontsource/lobster@5.0.3:
+    resolution: {integrity: sha512-U4BbSr3AyhoKB/VeDjEkPmT6zBjQ+0xOep1+HWJkkQWuCmDSzL0wVCyMXjcfeMsMdQqJRHJjrEo6wAK4fE6bFg==}
     dev: true
 
   /@fontsource/oswald@5.0.2:
