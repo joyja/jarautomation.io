@@ -7,7 +7,7 @@
       <ContentDoc v-slot="{ doc }">
         <div class="store__page">
           <div class="store__image">
-            <NuxtImg width="100%" height="100%" :src="doc.image" />
+            <img width="100%" height="100%" :src="doc.image" />
           </div>
           <div class="store__content__wrapper">
             <h1 class="store__heading">{{ doc.title }}</h1>
@@ -25,8 +25,8 @@
 </template>
 
 <style lang="scss">
-@import '~/assets/css/spacing';
-@import '~/assets/css/breakpoints.scss';
+@import 'src/css/spacing.scss';
+@import 'src/css/breakpoints.scss';
 
 .store__page {
   padding-top: calc(var(--spacing-unit)*5);
