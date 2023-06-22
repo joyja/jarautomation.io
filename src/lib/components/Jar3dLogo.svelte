@@ -1,4 +1,4 @@
-<img src="/jar3dDark.png" alt="JAR Logo"/>
+<img src="https://res.cloudinary.com/jarautomation/image/upload/f_auto,q_auto,w_200/v1687458377/jar3dDark.png" alt="JAR Logo"/>
 
 <style lang="scss">
   @import 'src/css/breakpoints.scss';
