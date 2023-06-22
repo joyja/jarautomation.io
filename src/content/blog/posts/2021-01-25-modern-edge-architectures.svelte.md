@@ -1,7 +1,7 @@
 ---
 title: Modern Edge Architectures
 description: "The power of general purpose hardware and open source software"
-created: July 22, 2021
+date: July 22, 2021
 image: "https://res.cloudinary.com/jarautomation/image/upload/c_lpad,f_auto,w_160,h_160/v1609275780/architectures/HA%20SCADA.png"
 published: true
 ---

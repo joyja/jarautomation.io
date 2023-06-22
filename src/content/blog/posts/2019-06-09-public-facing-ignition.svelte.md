@@ -3,7 +3,7 @@ title: Public Facing Ignition
 description: "Using DigitalOcean, Ubuntu, LXD and NGINX"
 image: "https://res.cloudinary.com/joyautomation/image/upload/c_lpad,f_auto,w_162,h_162/v1561924770/2019-06-09-public-facing-ignition/main.png"
 imageColor: "#002256"
-created: June 9, 2019
+date: June 9, 2019
 published: true
 ---
 

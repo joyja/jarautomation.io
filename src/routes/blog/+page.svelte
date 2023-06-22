@@ -29,6 +29,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   grid-gap: calc(var(--spacing-unit) * 3);
+  margin: calc( var(--spacing-unit) * 3);
 }
 .card {
   position: relative;
@@ -36,7 +37,7 @@
   flex-direction: column;
   justify-content: center;
   align-content: center;
-  border-radius: var(--spacing-unit);
+  border-radius: var(--rounded-md);
   aspect-ratio: 1;
   @extend .shadow-md;
   transition: all .3s ease-out;

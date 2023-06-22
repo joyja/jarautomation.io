@@ -26,15 +26,22 @@
 
 <style>
 	h1 {
-		margin: 0;
+		margin:0;
+		margin-top: calc(var(--spacing-unit) * 3);
+	}
+
+	h3 {
+		margin:0;
+		margin-top: calc(var(--spacing-unit) * 3);
 	}
 
 	.heading {
-		margin: 0;
-		font-size: 1.8rem;
+		font-size: var(--text-3xl);
+		line-height: var(--text-3xl-h);
 	}
 
 	.large {
-		font-size: 2.2rem;
+		font-size: var(--text-4xl);
+		line-height: var(--text-4xl-h);
 	}
 </style>

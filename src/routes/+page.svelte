@@ -63,6 +63,7 @@
   @include bpmd {
     margin-top: calc(var(--spacing-unit) * 6);
     font-size: var(--text-xl);
+    line-height: var(--text-xl-lh);
     line-height: 2rem;
   }
 }

@@ -10,6 +10,9 @@
 
 <style>
   p {
+		font-family: 'Basic';
+		color: var(--white);
+		text-align: center;
     margin: 0;
     margin-bottom: calc(var(--spacing-unit) * 4);
   }

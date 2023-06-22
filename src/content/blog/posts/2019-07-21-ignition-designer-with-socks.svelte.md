@@ -1,7 +1,7 @@
 ---
 title: Ignition Designer with SOCKS
 description: "Accessing a public facing Ignition Gateway through a SOCKS proxy"
-created: July 21, 2019
+date: July 21, 2019
 image: 'https://res.cloudinary.com/joyautomation/image/upload/c_lpad,f_auto,w_160,h_160/v1611514241/2019-07-21-ignition-designer-with-socks/ignition_with_socks_main.png'
 imageColor: "#002256"
 published: true
