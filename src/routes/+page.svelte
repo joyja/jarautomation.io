@@ -37,6 +37,17 @@
   right: calc(var(--spacing-unit) * 3);
   top: calc(var(--spacing-unit) * 3);
   transform: rotate(5deg);
+  transition: all .3s ease-out;
+  @include bpmd {
+    top: calc(var(--spacing-unit) * 30);
+  }
+  @include bpxl {
+    top: calc(var(--spacing-unit) * 20);
+    right: 10vw;
+  }
+  @include bp2xl {
+    right: 20vw;
+  }
 }
 .ignition-certified:after {
   position: absolute;
