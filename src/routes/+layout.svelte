@@ -9,16 +9,14 @@
   export let data
 </script>
 
-<div class="app">
-  <JarHeader />
-  <PageTransition pathname={data.pathname}>
-    <slot />
-  </PageTransition>
-  <JarFooter />
-</div>
+<JarHeader />
+<PageTransition pathname={data.pathname}>
+  <slot />
+</PageTransition>
+<JarFooter />
 
 <style lang="scss">
-.app {
+:global(body) {
   position: relative;
   background-image: url('/waterOnGlass.svg');
   background-repeat: no-repeat;

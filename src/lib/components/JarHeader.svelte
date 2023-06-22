@@ -12,7 +12,7 @@ import Jar3dLogo from "./Jar3dLogo.svelte";
 </nav>
 
 <style lang="scss">
-@import '../../css/breakpoints';
+@import 'src/css/breakpoints.scss';
 
 .logo {
   transition: height .3s ease-out;
