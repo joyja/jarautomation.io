@@ -9,6 +9,7 @@ published: true
 
 <script>
 import JarImage from '$lib/components/JarImage.svelte'
+import JarAlert from '$lib/components/JarAlert.svelte'
 </script>
 
 Here is one way to deploy a secure Inductive Automation Ignition gateway to a cloud platform with encryption and access control.
@@ -17,11 +18,7 @@ Here is one way to deploy a secure Inductive Automation Ignition gateway to a cl
 
 ## DigitalOcean
 
-This would work on any cloud platform, like Google Cloud Platform or
-Amazon Web Services, but I'm demonstrating on Digital Ocean because it
-has straight forward pricing, a low learning curve, and great
-documentation. I may add links and instructions to using the other
-platforms later. Click [here](https://m.do.co/c/7eb43ff4819d) to get $50 in credits for the next 30 days! Let's get to it.
+This would work on any cloud platform, like Google Cloud Platform or Amazon Web Services, but I'm demonstrating on Digital Ocean because it has straight forward pricing, a low learning curve, and great documentation. I may add links and instructions to using the other platforms later. Click [here](https://m.do.co/c/7eb43ff4819d) to get $50 in credits for the next 30 days! Let's get to it.
 
 ### Initial Droplet Setup
 
@@ -29,21 +26,13 @@ First, we need a server. So follow the [quick start guide](https://www.digitaloc
 
 <JarImage basis="310px" aspect-ratio="1" src="https://res.cloudinary.com/joyautomation/image/upload/f_auto/v1560138164/2019-06-09-public-facing-ignition/digital-ocean-ubuntu-18.04-x64.png" lazy-src="https://res.cloudinary.com/joyautomation/image/upload/e_blur:1000,q_1,f_auto/v1560138164/2019-06-09-public-facing-ignition/digital-ocean-ubuntu-18.04-x64.png" add-classes="pl-2 pr-1 pt-1" alt="DigitalOcean Ubtunu 18.04 x64 Button"></JarImage>
 
-I chose a 2 GB / 2 CPU with a 60 GB SSD disk, which at the time of
-writing this was $15.00/month. Choose what you want, but make sure there
-is enough resources to meet the [minimum system requirements](https://inductiveautomation.com/downloads/ignition/) of Ignition and the application you're going to build with it.
+I chose a 2 GB / 2 CPU with a 60 GB SSD disk, which at the time of writing this was $15.00/month. Choose what you want, but make sure there is enough resources to meet the [minimum system requirements](https://inductiveautomation.com/downloads/ignition/) of Ignition and the application you're going to build with it.
 
 Choose a datacenter region close to you.
 
-You don't need any of the additional options to follow along here, but
-if you know what you're doing and want an additional option, you do you!
+You don't need any of the additional options to follow along here, but if you know what you're doing and want an additional option, you do you!
 
-While you don't need to upload an SSH key, Digital Ocean will default to
-password based security and email you a password for the root account of
-the new droplet if you don't, I strongly recommend that you generate an
-SSH key for your SSH client of choice and upload it here. However, if
-you want to simply access the droplet from the web console, feel free to
-ignore me.
+While you don't need to upload an SSH key, Digital Ocean will default to password based security and email you a password for the root account of the new droplet if you don't, I strongly recommend that you generate an SSH key for your SSH client of choice and upload it here. However, if you want to simply access the droplet from the web console, feel free to ignore me.
  
 If you're using the SSH client in Ubuntu you can follow [this guide](https://www.digitalocean.com/docs/droplets/how-to/connect-with-ssh/), but here's the brief version. Run 
 
@@ -57,24 +46,17 @@ follow the prompts. You can enter a passphrase if you want to add security, or i
 cat ~/.ssh/id_rsa.pub
 ``` 
 
-and copy/paste the output into the window that opens when you click add SSH key while you're 
-creating the droplet on DigitalOcean.
+and copy/paste the output into the window that opens when you click add SSH key while you're creating the droplet on DigitalOcean.
 
-If you're using putty, you can follow
-[this guide](https://www.ssh.com/ssh/putty/windows/puttygen)
-to generate and load ssh keys.
+If you're using putty, you can follow [this guide](https://www.ssh.com/ssh/putty/windows/puttygen) to generate and load ssh keys.
         
-Now that we have a server, let's set it up. DigitalOcean has a great 
-guide for initial setup [here](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04)
-that walks you through creating your user account and initial
-configuration of the firewall, but in short, SSH into the server as root (or use the DigitalOcean web console):
+Now that we have a server, let's set it up. DigitalOcean has a great  guide for initial setup [here](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-18-04) that walks you through creating your user account and initial configuration of the firewall, but in short, SSH into the server as root (or use the DigitalOcean web console):
 
 ```shell
 ssh root@your_server_ip #replace with your IP address
 ```
 
-If you'd like your username to be joyja you'll run the following
-commands on the server:
+If you'd like your username to be joyja you'll run the following commands on the server:
 
 ```shell
 adduser joyja 
@@ -102,40 +84,26 @@ up when you created your user.
 
 ## LXD
  
-LXD is a linux container management system. If you aren't familiar with
-containers, but you've worked with virtual machines, containers are
-similar in that they provide an isolated environment, but they utilize
-the host's operating system kernel. They are much more resource
-friendly. We'll be using LXD to give us isolated environments for our
-Ignition server and our NGINX server.
+LXD is a linux container management system. If you aren't familiar with containers, but you've worked with virtual machines, containers are similar in that they provide an isolated environment, but they utilize the host's operating system kernel. They are much more resource friendly. We'll be using LXD to give us isolated environments for our Ignition server and our NGINX server.
 
-If your familiar with Docker, LXD is a similar technology that is more
-focused on isolated environments that you can interact with after
-launching. Docker is more about automating the creation of application
-environments. Both technologies are incredible and become even more
-powerful when used together, but that's a topic for another day.
+If your familiar with Docker, LXD is a similar technology that is more focused on isolated environments that you can interact with after launching. Docker is more about automating the creation of application environments. Both technologies are incredible and become even more powerful when used together, but that's a topic for another day.
 
-The first thing we need to do is give our user permissions to run LXD
-container management commands. Remember to use your username in place of
-joyja.
+The first thing we need to do is give our user permissions to run LXD container management commands. Remember to use your username in place of joyja.
+
 ```shell
 sudo usermod --append --groups lxd joyja
 ```
  
 Log out and then back in afterward.
  
-The recommended storage backend is ZFS, but to use it you need to
-install ZFS utilities.
+The recommended storage backend is ZFS, but to use it you need to install ZFS utilities.
 
 ```shell
 sudo apt-get update
 sudo apt-get install zfsutils-linux
 ```
  
-Now we're ready to initialize LXD. It will go through a series of
-questions. You should choose a larger size than the default for the new
-loop device, I chose 30GB. Other than that the defaults are good as long
-as you installed `zfsutils-linux`
+Now we're ready to initialize LXD. It will go through a series of questions. You should choose a larger size than the default for the new loop device, I chose 30GB. Other than that the defaults are good as long as you installed `zfsutils-linux`
       
 ```shell
 lxd init
@@ -158,23 +126,15 @@ Would you like stale cached images to be updated automatically? (yes/no) [defaul
 Would you like a YAML "lxd init" preseed to be printed? (yes/no) [default=no]: no
 ``` 
 
-Now you can run isolated environments of almost any Linux flavor and
-version you want, congrats! Let's create some. Run the following to
-create an Ubuntu 18.04 container named ignition.
+Now you can run isolated environments of almost any Linux flavor and version you want, congrats! Let's create some. Run the following to create an Ubuntu 18.04 container named ignition.
 
 ```shell
 lxc launch ubuntu:18.04 ignition
 ```
  
-You might be wondering why the command uses `lxc` instead of `lxd`. LXC
-is the original linux container environment and LXD adds additional
-features to lxc. I know it's confusing, but just take a breath and
-accept that you'll be typing `lxc` the majority of the time your working
-with containers.
+You might be wondering why the command uses `lxc` instead of `lxd`. LXC is the original linux container environment and LXD adds additional features to lxc. I know it's confusing, but just take a breath and accept that you'll be typing `lxc` the majority of the time your working with containers.
 
-LXD will retrieve the Ubuntu 18.04 image from the repository and create
-your new container. We can see the containers we've created by running
-the following.
+LXD will retrieve the Ubuntu 18.04 image from the repository and create your new container. We can see the containers we've created by running the following.
 
 ```shell
 lxc list
@@ -198,20 +158,11 @@ the containers. We'll need them later.
 
 ## Inductive Automation Ignition
  
-Inductive Automation's Ignition is a modern Human Machine Interface
-software that includes all the features we need to monitor and control
-process controls systems. Unlike traditional HMI software, the clients
-are 100% served over http(s) and therefore capable of being served over
-the internet. It's also available for linux, mac OSX, and Windows.
-Ignition includes the Perspective module, which allows a modern web
-browser to be used as a client. They also have some very nice third
-party MQTT modules that allow for simple, low bandwidth, secure data
-transfer accross the internet.
+Inductive Automation's Ignition is a modern Human Machine Interface software that includes all the features we need to monitor and control process controls systems. Unlike traditional HMI software, the clients are 100% served over http(s) and therefore capable of being served over the internet. It's also available for linux, mac OSX, and Windows. Ignition includes the Perspective module, which allows a modern web browser to be used as a client. They also have some very nice third party MQTT modules that allow for simple, low bandwidth, secure data transfer accross the internet.
 
 ### Ignition Setup
  
-Let's access the shell on our brand new ignition container. Each
-container has a default user called "ubuntu".
+Let's access the shell on our brand new ignition container. Each container has a default user called "ubuntu".
 
 ```shell
 lxc exec ignition -- su --login ubuntu
@@ -223,9 +174,7 @@ Now we'll download Ignition. The current version is 8.0.2:
 curl -L -O -H 'Referer: https://inductiveautomation.com/downloads/ignition' https://files.inductiveautomation.com/release/ia/build8.0.2/20190605-1127/Ignition-8.0.2-linux-x64-installer.run --output "Ignition-8.0.2-linux-x64-installer.run"
 ```
  
-If you need a different version, you can find it
-[here](https://inductiveautomation.com/downloads/ignition/)
-and copy the appropriate link.
+If you need a different version, you can find it [here](https://inductiveautomation.com/downloads/ignition/) and copy the appropriate link.
 
 Add execute permissions to the downloaded file and install:
       
@@ -234,29 +183,17 @@ chmod +x Ignition-8.0.2-linux-x64-installer.run
 sudo ./Ignition-8.0.2-linux-x64-installer.run
 ```
 
-You'll be asked a series of questions. I selected all the defaults for
-the purposes of this guide. After the questions, Ignition will be
-installed and started automatically if you said yes to that question.
+You'll be asked a series of questions. I selected all the defaults for the purposes of this guide. After the questions, Ignition will be installed and started automatically if you said yes to that question.
 
 ## NGINX
  
-NGINX is a popular web server, reverse proxy, and load balancer. We'll
-be using it as a reverse proxy here. It will allow us to control access
-to specific gateway URLs and give us encryption through HTTPS with Let's
-Encrypt.
+NGINX is a popular web server, reverse proxy, and load balancer. We'll be using it as a reverse proxy here. It will allow us to control access to specific gateway URLs and give us encryption through HTTPS with Let's Encrypt.
 
 ## Port Forwarding
 
-Befor we setup our NGINX container lets make sure http/https requests
-are forwarded to the nginx container. Run `lxc list` and
-record the nginx container IPV4 address if you haven't done that
-already.
+Befor we setup our NGINX container lets make sure http/https requests are forwarded to the nginx container. Run `lxc list` and record the nginx container IPV4 address if you haven't done that already.
 
-Run the following commands to create iptables rules that will forward
-port 80 and port 443 requests to our nginx container.
-`your_server_ip` is the IP address of your DigitalOcean
-droplet and `your_container_ip` is the nginx container IP
-address:
+Run the following commands to create iptables rules that will forward port 80 and port 443 requests to our nginx container. `your_server_ip` is the IP address of your DigitalOcean droplet and `your_container_ip` is the nginx container IP address:
       
 ```shell
 PORT=80 PUBLIC_IP=your_server_ip CONTAINER_IP=your_container_ip \
@@ -272,8 +209,7 @@ sudo -E bash -c 'iptables -t nat -I PREROUTING -i eth0 -p TCP -d $PUBLIC_IP --dp
 sudo iptables -t nat -L PREROUTING --line-numbers
 ```
 
-and if you need to delete a rule you can use the following, replacing 1
-with the line number you want to delete:
+and if you need to delete a rule you can use the following, replacing 1 with the line number you want to delete:
 
 ```shell
 sudo iptables -t nat -D PREROUTING 1
@@ -293,13 +229,7 @@ sudo apt-get update
 sudo apt-get install nginx
 ```
 
-Next we're going to configure NGINX as a reverse proxy for our Ignition
-server. NGINX is configured by setting up server blocks, which means
-that we write a configuration file for each domain that is served by
-this NGINX server. The standard convention is to name these server
-blocks with the name of the domain being served. The following uses my
-test domain <code>ignition.jarautomation.io</code> so please replace it
-with your own.
+Next we're going to configure NGINX as a reverse proxy for our Ignition server. NGINX is configured by setting up server blocks, which means that we write a configuration file for each domain that is served by this NGINX server. The standard convention is to name these server blocks with the name of the domain being served. The following uses my test domain <code>ignition.jarautomation.io</code> so please replace it with your own.
 
 Let's create our server block. I'm using vim, but feel free to use nano
 or any other command line text editor you prefer.
@@ -308,11 +238,7 @@ or any other command line text editor you prefer.
 sudo vim /etc/nginx/sites-available/ignition.jarautomation.io
 ```
 
-The configuration below will simply proxy all requests to the Ignition
-server. If you want to know more about the options, linuxize has a
-[great post](https://linuxize.com/post/nginx-reverse-proxy/).
-Remember to use the Ignition container IP address we recorded from
-running <code>lxc list</code> earlier.
+The configuration below will simply proxy all requests to the Ignition server. If you want to know more about the options, linuxize has a [great post](https://linuxize.com/post/nginx-reverse-proxy/). Remember to use the Ignition container IP address we recorded from running <code>lxc list</code> earlier.
 
 ```shell
 server {
@@ -341,11 +267,7 @@ server {
 }
 ```
  
-We can also use the following more complex configuration to limit the IP
-addresses that can access the root gateway page, designer and vision
-module while keeping the Perspective module public. It only allows
-public access to the URLs required for Perspective to function using the
-mobile app or directly from a web browser.
+We can also use the following more complex configuration to limit the IP addresses that can access the root gateway page, designer and vision module while keeping the Perspective module public. It only allows public access to the URLs required for Perspective to function using the mobile app or directly from a web browser.
       
 ```shell
 server {
@@ -480,8 +402,7 @@ server {
 }
 ```
  
-Now we need to enable our server block configuration by creating a
-symbolic link from these files to the sites-enabled directory:
+Now we need to enable our server block configuration by creating a symbolic link from these files to the sites-enabled directory:
       
 ```shell
 sudo ln -s /etc/nginx/sites-available/ignition.jarautomation.io /etc/nginx/sites-enabled/
@@ -491,26 +412,15 @@ Now let's add some encryption!
 
 ### Let's Encrypt
  
-[Let's Encrypt](https://letsencrypt.org/) is making the
-internet a better place by providing free SSL certificates and tools
-that makes it easy to renew them. Because they make it easy and free,
-certificates can be renewed more often.
+[Let's Encrypt](https://letsencrypt.org/) is making the internet a better place by providing free SSL certificates and tools that makes it easy to renew them. Because they make it easy and free, certificates can be renewed more often.
 
-::jar-alert
+<JarAlert>
 To do this part you'll need to own a domain with an A record pointing to the public IP address of the DigitalOcean droplet. For example, I'm using <code>ignition.jarautomation.io</code>
-::
+</JarAlert>
 
-If you're familiar with Ignition, you may be wondering why we don't just
-install the SSL certificates on the gateway and use that. We totally
-could, but I prefer to use SSL with NGINX and Let's Encrypt because we
-can use auto renewal and we don't have to go through the extra step of
-adding the SSL certificate to the java keystore whenever we want to
-renew. The connection from NGINX to Ignition is also completely private
-through the container bridge network so there is no real benefit to
-encrypting it.
+If you're familiar with Ignition, you may be wondering why we don't just install the SSL certificates on the gateway and use that. We totally could, but I prefer to use SSL with NGINX and Let's Encrypt because we can use auto renewal and we don't have to go through the extra step of adding the SSL certificate to the java keystore whenever we want to renew. The connection from NGINX to Ignition is also completely private through the container bridge network so there is no real benefit to encrypting it.
 
-First, we'll install the Let's Encrypt Certbot utility that will install
-and manage our certificates.
+First, we'll install the Let's Encrypt Certbot utility that will install and manage our certificates.
       
 ```shell
 sudo add-apt-repository ppa:certbot/certbot
@@ -522,17 +432,9 @@ Then we'll run the utility.
 sudo certbot --nginx -d ignition.jarautomation.io
 ```
  
-Add <kbd>-d <code>&lt;domain name&gt;</code></kbd> for each domain you
-want to create a certificate for. You'll be asked a series of questions
-including whether you agree to the terms of service, if you want to join
-the Electronic Frontier Foundation email list, and if you want to force
-all traffic to HTTPS. You can answer these how you wish, other than you
-won't be able to proceed without agreeing to the terms of service. I
-force all traffic to HTTPS so all Ignition traffic is encrypted.
+Add <kbd>-d <code>&lt;domain name&gt;</code></kbd> for each domain you want to create a certificate for. You'll be asked a series of questions including whether you agree to the terms of service, if you want to join the Electronic Frontier Foundation email list, and if you want to force all traffic to HTTPS. You can answer these how you wish, other than you won't be able to proceed without agreeing to the terms of service. I force all traffic to HTTPS so all Ignition traffic is encrypted.
 
-Once you've answered all the questions Certbot will generate your
-certificate and automatically configure NGINX for HTTPS. If you open
-your NGINX configuration again you'll see what Certbot added.
+Once you've answered all the questions Certbot will generate your certificate and automatically configure NGINX for HTTPS. If you open your NGINX configuration again you'll see what Certbot added.
       
 ```shell
 server {
@@ -687,12 +589,8 @@ server {
 }
 ```
  
-You should now be able to go to your url, mine is <https://ignition.jarautomation.io> and you'll see the Ignition gateway welcome page. Just remember, if
-you limited which IP addresses can access the root gateway page, you'll
-need to be in the right location to access it.
+You should now be able to go to your url, mine is <https://ignition.jarautomation.io> and you'll see the Ignition gateway welcome page. Just remember, if you limited which IP addresses can access the root gateway page, you'll need to be in the right location to access it.
 
 <JarImage aspect-ratio="1.2" src="https://res.cloudinary.com/joyautomation/image/upload/f_auto/v1562005047/2019-06-09-public-facing-ignition/ignition.png" alt="Ignition Gateway Home Screen"></JarImage>
 
-
-There you have it! A public facing Ignition gateway in the cloud with
-access control and easy to maintain encryption.
+There you have it! A public facing Ignition gateway in the cloud with access control and easy to maintain encryption.

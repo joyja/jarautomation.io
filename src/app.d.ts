@@ -24,4 +24,19 @@ declare namespace App {
 		image: string;
 		imageColor: string;
 	}
+	interface Computer {
+		slug:string;
+		make:string;
+		model:string;
+		img:string;
+		base:number;
+		description:string;
+		processor:string;
+		options: {
+			ram: {
+				name:string;
+				price:number;
+			}[]
+		}
+	}
 }

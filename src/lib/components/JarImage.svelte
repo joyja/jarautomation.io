@@ -15,7 +15,9 @@ export let src:string,
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-bottom: calc(var(--spacing-unit) * 3)
+  margin-bottom: calc(var(--spacing-unit) * 3);
+  border-radius: var(--rounded-md);
+  overflow: hidden;
 }
 .content--img {
   flex-shrink: 1;

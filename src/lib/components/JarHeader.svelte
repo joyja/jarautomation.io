@@ -35,5 +35,9 @@ import Jar3dLogo from "./Jar3dLogo.svelte";
 .header {
   padding: calc(var(--spacing-unit)*3);
   height: 60px;
+  @include bpmd {
+    height:100px;
+  }
+  z-index: 10;
 }
 </style>

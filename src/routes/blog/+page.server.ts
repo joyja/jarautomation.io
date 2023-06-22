@@ -7,7 +7,6 @@ const MAX_POSTS = 10
 export const load: PageServerLoad = async ({ url }) => {
 	/** @type {import('./$types').PageLoad} */
 	const modules = import.meta.glob(`/src/content/blog/posts/*.{md,svx,svelte.md}`);
-	console.log(modules)
 	const postPromises = Object.entries(modules).map(([path, resolver]) =>
 		resolver().then(
 			(post) => {

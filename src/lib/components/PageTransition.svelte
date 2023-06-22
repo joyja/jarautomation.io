@@ -15,6 +15,7 @@
 <style lang="scss">
 main {
 	position: relative;
+	z-index: 0;
 }
 @media (min-width: 0px) {
   .transitor {

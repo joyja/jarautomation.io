@@ -1,5 +1,6 @@
 <script lang="ts">
-let computers:{ make:string, model:string, processor:string, img:string }[] = []
+export let data
+const computers = data.computers
 </script>
 
 <div class="row">
@@ -7,7 +8,7 @@ let computers:{ make:string, model:string, processor:string, img:string }[] = []
     <h1 class="title">Store</h1>
     <div class="computers">
       {#each computers as computer}
-      <a href={`/store/products/${computer.make}-${computer.model}`} class="computer">
+      <a href={`/store/${computer.make}-${computer.model}`} class="computer">
         <span class="computer__title">{ computer.model }</span>
         <img src={ computer.img } alt={ `${computer.make} ${computer.model}` }/>
         <span class="computer__processor">{ computer.processor }</span>
@@ -17,7 +18,7 @@ let computers:{ make:string, model:string, processor:string, img:string }[] = []
   </div>
 </div>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .computers {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(60px, 150px));
@@ -26,6 +27,8 @@ let computers:{ make:string, model:string, processor:string, img:string }[] = []
   justify-content: center;
   position: relative;
   transition: transform .3s ease-out;
+  overflow: hidden;
+  padding: calc(var(--spacing-unit) * 3);
 }
 .computer {
   position: relative;
@@ -33,10 +36,13 @@ let computers:{ make:string, model:string, processor:string, img:string }[] = []
   border-radius: var(--spacing-unit);
   border: none;
   transition: all .3s ease-out;
-}
-.computer > img {
-  height: 100%;
-  width: 100%;
+  & > img {
+    height: 100%;
+    width: 100%;
+  }
+  &:hover {
+    transform: rotate(-1deg) scale(1.1);
+  }
 }
 .computer__title {
   margin: auto;

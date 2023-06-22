@@ -11,24 +11,9 @@ published: true
 import JarImage from '$lib/components/JarImage.svelte'
 </script>
 
-We'll kick this post off by saying it's an addendum to 
-[this post](/blog/2019-06-09-public-facing-ignition)
-describing one way to host an Ignition Gateway publicly. In that post we
-discuss how to limit access to the root gateway url to increase security
-for the gateway configuration page, the designer, and vision client
-access. This post assumes you've gone through that and you have an
-Ignition gateway running in an LXD container on a virtual private
-server.
+We'll kick this post off by saying it's an addendum to [this post](/blog/2019-06-09-public-facing-ignition) describing one way to host an Ignition Gateway publicly. In that post we discuss how to limit access to the root gateway url to increase security for the gateway configuration page, the designer, and vision client access. This post assumes you've gone through that and you have an Ignition gateway running in an LXD container on a virtual private server.
 
-In that post we discuss how to limit access to the root gateway url to
-increase security for the gateway configuration page, the designer, and
-vision client access. Here we will show you how to increase security
-even more by demonstrating how to completely deny gateway root url
-access in NGINX and use a SOCKS proxy to provide an encrypted, RSA keyed
-tunnel to access gateway development features. This is much more secure
-than just using IP address filtering in NGINX plus, anecdotally, I've
-been having reliability issues when trying to access the gateway through
-an NGINX HTTPS reverse proxy anyway.
+In that post we discuss how to limit access to the root gateway url to increase security for the gateway configuration page, the designer, and vision client access. Here we will show you how to increase security even more by demonstrating how to completely deny gateway root url access in NGINX and use a SOCKS proxy to provide an encrypted, RSA keyed tunnel to access gateway development features. This is much more secure than just using IP address filtering in NGINX plus, anecdotally, I've been having reliability issues when trying to access the gateway through an NGINX HTTPS reverse proxy anyway.
 
 <br/>
 
@@ -36,22 +21,11 @@ an NGINX HTTPS reverse proxy anyway.
 
 <br/>
 
-We'll show you how to do this from an Ubuntu client machine, but you can
-also do this from Windows using
-<a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a>
-(ignoring all the LXD steps). <a href="https://alvinalexander.com/unix/edu/putty-ssh-tunnel-firefox-socks-proxy/2-configure-putty-ssh-tunnel-ssh-server.shtml">This guide</a>
-has some relevant instructions for configuring Putty. <a href="https://www.perfect-privacy.com/en/manuals/windows_7_httpproxy">This Windows 7 proxy guide</a>
-also has some information about where to configure Windows proxies. You
-could also run Ubuntu desktop in a virtual machine and follow along.
+We'll show you how to do this from an Ubuntu client machine, but you can also do this from Windows using <a href="https://www.chiark.greenend.org.uk/~sgtatham/putty/">Putty</a> (ignoring all the LXD steps). <a href="https://alvinalexander.com/unix/edu/putty-ssh-tunnel-firefox-socks-proxy/2-configure-putty-ssh-tunnel-ssh-server.shtml">This guide</a> has some relevant instructions for configuring Putty. <a href="https://www.perfect-privacy.com/en/manuals/windows_7_httpproxy">This Windows 7 proxy guide</a> also has some information about where to configure Windows proxies. You could also run Ubuntu desktop in a virtual machine and follow along.
 
-If you're doing Ignition development from a linux computer. The best way
-to get a secure connection over SSH with SOCKS that you don't have to
-initialize every time is to create a development environment in LXD. In
-this environment we'll set up a permanent SOCKS proxy and configure it
-so all http(s) connections use it.
+If you're doing Ignition development from a linux computer. The best way to get a secure connection over SSH with SOCKS that you don't have to initialize every time is to create a development environment in LXD. In this environment we'll set up a permanent SOCKS proxy and configure it so all http(s) connections use it.
 
-If you want to know how to initialize an LXD environment you can view my
-[previous post](/blog/posts/2019-06-09-public-facing-ignition). Or there is also some great info on <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-and-use-lxd-on-ubuntu-16-04">Digital Ocean</a>.
+If you want to know how to initialize an LXD environment you can view my [previous post](/blog/2019-06-09-public-facing-ignition). Or there is also some great info on <a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-and-use-lxd-on-ubuntu-16-04">Digital Ocean</a>.
 
 LXD containers by default are headless, so we need to add a profile
 allowing lxd to launch GUI (graphical user interface) applications. To
@@ -256,21 +230,13 @@ open like shown below:
 
 <JarImage basis="800px" aspect-ratio="1.43" src="https://res.cloudinary.com/joyautomation/image/upload/f_auto/v1564593447/2019-07-21-ignition-designer-with-socks/designer_launcher.png" lazy-src="https://res.cloudinary.com/joyautomation/image/upload/e_blur:1000,q_1,f_auto/v1564593447/2019-07-21-ignition-designer-with-socks/designer_launcher.png" alt="Architecture Diagram"></JarImage>
 
-Click Add Designer, then Manually Add Gateway and enter the IP address
-and port number for the Ignition server container (again, not to be
-confused with your Ignition client contaner):
+Click Add Designer, then Manually Add Gateway and enter the IP address and port number for the Ignition server container (again, not to be confused with your Ignition client contaner):
 
 <JarImage basis="400px" aspect-ratio="2.5" color="transparent" src="https://res.cloudinary.com/joyautomation/image/upload/f_auto/v1564593447/2019-07-21-ignition-designer-with-socks/designer_launcher_add_gateway.png" lazy-src="https://res.cloudinary.com/joyautomation/image/upload/e_blur:1000,q_1,f_auto/v1564593447/2019-07-21-ignition-designer-with-socks/designer_launcher_add_gateway.png" alt="Architecture Diagram"></JarImage>
 
-We need to tell the designer launcher to launch designer applications
-that use our new SOCKS proxy. To do this, click on the three vertical
-dots in the upper right hand corner of the card for the gateway you just
-added. Select Manage from the drop down menu.
+We need to tell the designer launcher to launch designer applications that use our new SOCKS proxy. To do this, click on the three vertical dots in the upper right hand corner of the card for the gateway you just added. Select Manage from the drop down menu.
 
-Enter <code>-DsocksProxyHost=localhost</code> in the JVM Arguments entry
-like shown below. To reiterate, since we're using the default port
-<code>1080</code> we don't need to add a
-<code>-DsocksProxyPort</code> argument here, but if you want to use a
+Enter <code>-DsocksProxyHost=localhost</code> in the JVM Arguments entry like shown below. To reiterate, since we're using the default port <code>1080</code> we don't need to add a <code>-DsocksProxyPort</code> argument here, but if you want to use a
 different port you'll have to add it.
 
 <br/>

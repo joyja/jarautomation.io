@@ -1,9 +1,10 @@
 ---
-title: Protectli VP2410
-description: Celeron 4 Network Port Fanless Appliance
+title: Protectli VP4670
+description: 6 Port Intel i7 I225V 2.5G Network Port Fanless Appliance
 make: protectli
-model: vp4120
+model: vp4670
 image: https://protectli.com/wp-content/uploads/2021/04/VP2410_front-600x600.png
+published: true
 ---
 
 * Intel Celeron® J4125 Quad Core at 2 GHz (Burst up to 2.7 GHz)

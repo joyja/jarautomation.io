@@ -1,9 +1,10 @@
 import type { PageLoad } from './$types';
 import { slugFromPath } from '$lib/slugFromPath';
 import { error } from '@sveltejs/kit';
+import { inventory } from '$lib/inventory';
 
 export const load: PageLoad = async ({ params }) => {
-	const modules = import.meta.glob(`/src/posts/*.{md,svx,svelte.md}`);
+	const modules = import.meta.glob(`/src/content/store/products/*.{md,svx,svelte.md}`);
 
 	let match: { path?: string; resolver?: App.MdsvexResolver } = {};
 	for (const [path, resolver] of Object.entries(modules)) {
@@ -21,6 +22,12 @@ export const load: PageLoad = async ({ params }) => {
 
 	return {
 		component: post.default,
-		frontmatter: post.metadata
+		frontmatter: post.metadata,
+		inventoryData: inventory.computers.find((computer) => {
+			return (
+				post.metadata.make === computer.make &&
+				post.metadata.model === computer.model
+			)
+		})
 	};
 };
