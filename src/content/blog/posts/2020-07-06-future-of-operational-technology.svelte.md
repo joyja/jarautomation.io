@@ -3,8 +3,12 @@ title: The Future of Operational Technology
 description: "Containerization and an Open Source Stack"
 date: July 6, 2020
 image: 'https://res.cloudinary.com/jarautomation/image/upload/c_lpad,f_auto,w_160,h_160/v1594103000/blog/2020-07-06%20The%20Future%20of%20Operational%20Technology/Modern%20Architecture.png'
-published: false
+published: true
 ---
+
+<script>
+import JarImage from '$lib/components/JarImage.svelte'
+</script>
 
 <JarImage basis="1150px" aspect-ratio="1.8" src="https://res.cloudinary.com/jarautomation/image/upload/f_auto/v1594103000/blog/2020-07-06%20The%20Future%20of%20Operational%20Technology/Modern%20Architecture.png" lazy-src="https://res.cloudinary.com/jarautomation/image/upload/e_blur:1000,q_1,f_auto/v1594103000/blog/2020-07-06%20The%20Future%20of%20Operational%20Technology/Modern%20Architecture.png" alt="Architecture Diagram"></JarImage>
 

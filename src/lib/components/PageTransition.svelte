@@ -13,6 +13,9 @@
 {/key}
 
 <style lang="scss">
+main {
+	position: relative;
+}
 @media (min-width: 0px) {
   .transitor {
 		margin-top: 12rem;
@@ -32,11 +35,11 @@
 .transitor {
 	flex-grow: 1;
 	transition: margin-top .3s ease-out;
-	position: relative;
+	// position: relative;
 }
 .transitorpost {
 	flex-grow: 1;
 	transition: padding-top .3s ease-out;
-	position: relative;
+	// position: relative;
 }
 </style>

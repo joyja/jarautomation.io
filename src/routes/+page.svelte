@@ -1,15 +1,15 @@
+<div class="ignition-certified">
+  <img
+    src="https://res.cloudinary.com/jarautomation/image/upload/g_auto,f_auto/v1605644772/badge_gold.png"
+    placeholder="https://res.cloudinary.com/jarautomation/image/upload/e_blur:1000,q_1,g_auto,f_auto/v1605644772/badge_gold.png"
+    loading="lazy"
+    alt="Gold certified ignition integrator"
+  />
+</div>
 <div class="row">
   <div class="column">
     <h1 class="title">A different kind of industrial automation company</h1>
     <p class="leading">We specialize in developing modern industrial automation solutions using the latest technology to eliminate vendor lock-in, improve reliability, lower cost, and do generally amazing things with industrial control systems.</p>
-    <div class="ignition-certified">
-      <img
-        src="https://res.cloudinary.com/jarautomation/image/upload/g_auto,f_auto/v1605644772/badge_gold.png"
-        placeholder="https://res.cloudinary.com/jarautomation/image/upload/e_blur:1000,q_1,g_auto,f_auto/v1605644772/badge_gold.png"
-        loading="lazy"
-        alt="Gold certified ignition integrator"
-      />
-    </div>
     <div class="buttons space-x-2">
       <a href="/store" class="button--accent button--text-with-symbol">Go to Store
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" height="16px" width="16px">
@@ -35,14 +35,14 @@
 .ignition-certified {
   position: absolute;
   right: calc(var(--spacing-unit) * 3);
-  top: calc(var(--spacing-unit) * 3);
+  top: calc(var(--spacing-unit) * -13);
   transform: rotate(5deg);
   transition: all .3s ease-out;
   @include bpmd {
-    top: calc(var(--spacing-unit) * 30);
+    top: calc(var(--spacing-unit) * 13);
   }
   @include bpxl {
-    top: calc(var(--spacing-unit) * 20);
+    top: calc(var(--spacing-unit) * 3);
     right: 10vw;
   }
   @include bp2xl {
