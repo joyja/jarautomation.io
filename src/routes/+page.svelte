@@ -1,7 +1,6 @@
 <div class="ignition-certified">
   <img
-    src="https://res.cloudinary.com/jarautomation/image/upload/g_auto,f_auto/v1605644772/badge_gold.png"
-    placeholder="https://res.cloudinary.com/jarautomation/image/upload/e_blur:1000,q_1,g_auto,f_auto/v1605644772/badge_gold.png"
+    src="https://res.cloudinary.com/jarautomation/image/upload/f_auto,q_auto,w_120/v1605644772/badge_gold.png"
     loading="lazy"
     alt="Gold certified ignition integrator"
   />
@@ -23,7 +22,7 @@
       </a>
     </div>
     <div class="process">
-      <img src="/process.png" alt="Pumps and piping with a tank"/>
+      <img src="https://res.cloudinary.com/jarautomation/image/upload/f_auto,q_auto,w_800/v1687457947/process.png" alt="Pumps and piping with a tank"/>
     </div>
   </div>
 </div>
