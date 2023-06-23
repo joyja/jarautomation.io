@@ -57,12 +57,12 @@
 	:global(.content > ol) {
 		font-family: Basic;
 		list-style-type: decimal;
-		list-style-position: inside;
+		list-style-position: outside;
 	}
 	:global(.content > ul) {
 		font-family: Basic;
 		list-style-type: disc;
-		list-style-position: inside;
+		list-style-position: outside;
 	}
 	:global(.content > p > a) {
 		color: var(--red-600);

@@ -6,10 +6,10 @@ model: vp4630
 published: true
 ---
 
-* Intel Celeron® J4125 Quad Core at 2 GHz (Burst up to 2.7 GHz)
-* 4 Intel® Gigabit Ethernet NIC ports
-* M.2 SATA SSD Slot (Note: This device does not support NVMe drives)
-* 8GB eMMC module on board
+* Intel® i3-10110U Dual Core / 4 Thread at 2.1 GHz (Turbo up to 4 GHz)
+* 6 Intel® 2.5 Gigabit Ethernet NIC ports
+* M.2 SSD Slot accomodates NVMe or M.2 SATA
+* 16GB eMMC module on board
 * Intel® AES-NI support
 * Fanless and Silent
-* Included Universal Power Supply, VESA mount kit, Serial Console Cable, SATA data and power cables for internal SSD, Quick Start Guide
+* Included 12v Universal Power Supply, VESA mount kit, Serial Console Cable, SATA data and power cables for internal SSD, Quick Start Guide

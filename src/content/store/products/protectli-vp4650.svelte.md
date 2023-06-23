@@ -7,10 +7,10 @@ image: https://protectli.com/wp-content/uploads/2021/04/VP2410_front-600x600.png
 published: true
 ---
 
-* Intel Celeron® J4125 Quad Core at 2 GHz (Burst up to 2.7 GHz)
-* 4 Intel® Gigabit Ethernet NIC ports
-* M.2 SATA SSD Slot (Note: This device does not support NVMe drives)
-* 8GB eMMC module on board
+* Intel® i5-10210U Quad Core / 8 Thread at 1.6 GHz (Turbo up to 4.2 GHz)
+* 6 Intel® 2.5 Gigabit Ethernet NIC ports
+* M.2 SSD Slot accomodates NVMe or M.2 SATA
+* 16GB eMMC module on board
 * Intel® AES-NI support
 * Fanless and Silent
-* Included Universal Power Supply, VESA mount kit, Serial Console Cable, SATA data and power cables for internal SSD, Quick Start Guide
+* Included 12v Power Supply, VESA mount kit, Serial Console Cable, SATA data and power cables for internal SSD, Quick Start Guide
